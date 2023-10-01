@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Game List</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Publisher</th>
+        <th>Platform</th>
+        <th>Price</th>
+    </tr>
+    <!-- Loop through the games in gameList -->
+    <tr th:each="aGame : ${gameList}">
+        <td th:text="${aGame.id}">55</td>
+        <td th:text="${aGame.title}">Yesterday</td>
+        <td th:text="${aGame.publisher}">Paul McCartney</td>
+        <td th:text="${aGame.platform}">Classical</td>
+        <td th:text="${aGame.price}">Classical</td>
+    </tr>
+</table>
+<br><hr><br>
+<table>
+    <form method="post" action="/addGame" th:action="@{/addGame}" th:object="${game}">
+        ID: <input type="number" th:field="*{id}" /><br>
+        Title: <input type="text" th:field="*{title}" /><br>
+        Publisher: <input type="text" th:field="*{publisher}" /><br>
+        Platform:
+        <select th:field="*{platforms}">
+            <!-- Loop through the platforms array -->
+            <option th:each="p : ${game.platforms}" th:value="${p}" th:text="${p}" />
+        </select><br>
+        Price: <input type="number" th:field="*{price}" /><br>
+        <input type="submit" value="Add Game!" />
+    </form>
+</table>
+
+<a href="/"><button>Go Home</button></a>
+
+
+</body>
+</html>
